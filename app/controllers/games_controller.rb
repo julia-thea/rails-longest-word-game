@@ -19,11 +19,11 @@ class GamesController < ApplicationController
     @user_serialized = open(url).read
     @user = JSON.parse(@user_serialized)
     if !@user["found"]
-      @message = "Sorry but #{@user_guess} does not seem to be a valid English word..."
+      @message = "Sorry but #{@user_guess.upcase} does not seem to be a valid English word..."
     elsif @user_guess.chars.all? { |char| @user_guess.count(char) <= @letters.count(char)}
       @message = "Congratulations! #{@user_guess.upcase} is a valid English word!"
     else
-      @message = "Sorry, but #{@user_guess} can't be built out of #{@letters.upcase}"
+      @message = "Sorry, but #{@user_guess.upcase} can't be built out of #{@letters.upcase}"
     end
   end
 end
